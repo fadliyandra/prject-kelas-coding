@@ -9,31 +9,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.testproject.models.Person;
+import com.testproject.data.entities.Person;
+import com.testproject.data.repository.PersonRepo;
+import com.testproject.service.PersonService;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
+
+    // @GetMapping
+    // public String showindexPAge(Model model){
+
+        
+    //     return null;
+    // }
+
     @GetMapping
     public String showindex(Model model){
-        Date date = new Date();
-        model.addAttribute("serverTime", date);
-
-        Person p1 = new Person();
-        p1.setFirstName("fadliiii");
-        p1.setLastName("yandra");
-        p1.setAge(30);
-        p1.setEmail("fadlia@ymail.com");
-        Person p2 = new Person("fadli", "yandra", 30, "fadlyandra@ymai.com");
-        Person p3 = new Person("fadli1", "yandra1", 310, "fadlyandra1@ymai.com");
-        
-        List<Person> people = new ArrayList<>();
-        people.add(p1);
-        people.add(p2);
-        people.add(p3);
-
-        model.addAttribute("peoples", people);
+        //PersonRepo repo = new PersonRepo();
+        PersonService service = new PersonService();
+    
+        model.addAttribute("peoples" ,service.findAllPersons());
             return "index";
         } 
     }
