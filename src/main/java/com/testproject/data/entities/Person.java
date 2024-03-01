@@ -1,13 +1,21 @@
 package com.testproject.data.entities;
 
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 public class Person {
 
     private long id;
+
+    @NotEmpty(message = "fisrt name harus ada")
     private String firstName;
+
+    @NotEmpty(message = "last name harus ada")
     private String lastName;
     private int age;
+
+    @NotEmpty(message = "email harus ada")
+    @Email(message = "invalid email")
     private String email;
 
     

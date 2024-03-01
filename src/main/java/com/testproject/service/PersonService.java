@@ -19,4 +19,21 @@ public class PersonService {
         return repo.getPersons();
     }
 
+    public Person findPersonById(long id) {
+        return repo.findPersonById(id);
+    }
+
+    public void removePersonById(int id){
+        repo.removePersonById(id);
+    }
+
+    public void addPerson(Person person){
+        repo.addPerson(person);
+    }
+    public void updatePerson(Person person){
+        repo.updatePerson(person);
+    }
+
+   
+
 }
