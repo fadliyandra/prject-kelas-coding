@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.testproject.data.entities.Person;
 import com.testproject.data.repository.PersonRepo;
 import com.testproject.dto.MessageData;
+import com.testproject.service.PerosnServiceJpa;
 import com.testproject.service.PersonService;
 
 import jakarta.validation.Valid;
@@ -26,19 +28,13 @@ import jakarta.validation.Valid;
 @RequestMapping("/")
 public class HomeController {
 
+    @Autowired
+    private PerosnServiceJpa service;
+    // private PersonService service;
 
-    // @GetMapping
-    // public String showindexPAge(Model model){
-
-        
-    //     return null;
-    // }
-
-    private PersonService service;
-
-        public HomeController(){
-            service = new PersonService();
-        }
+        // public HomeController(){
+        //     service = new PersonService();
+        // }
 
         @GetMapping
         public String showindex(Model model){
@@ -101,13 +97,13 @@ public class HomeController {
 
 
         @GetMapping("/persons/{id}")
-        public String showDetaolerson( Model model, @PathVariable("id") int id){
+        public String showDetaolerson( Model model, @PathVariable("id") long id){
            model.addAttribute("person", service.findPersonById(id));
             return "detail";
         }
 
         @GetMapping("/persons/remove/{id}")
-        public String removePerson(@PathVariable("id") int id){
+        public String removePerson(@PathVariable("id") long id){
             service.removePersonById(id);
             return "redirect:/";
         }
