@@ -2,9 +2,9 @@ package com.testproject.data.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.testproject.data.entities.Person;
+import com.testproject.data.entities.User;
 
-public interface PersonRepoJpa extends CrudRepository<Person, Long>{
+public interface UserRepoJpa extends CrudRepository<User, Long>{
     
     
 }

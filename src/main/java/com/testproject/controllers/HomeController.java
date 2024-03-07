@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.testproject.data.entities.Person;
-import com.testproject.data.repository.PersonRepo;
+import com.testproject.data.entities.User;
+import com.testproject.data.repository.UserRepo;
 import com.testproject.dto.MessageData;
-import com.testproject.service.PerosnServiceJpa;
-import com.testproject.service.PersonService;
+import com.testproject.service.UserServiceJpa;
+import com.testproject.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -29,7 +29,7 @@ import jakarta.validation.Valid;
 public class HomeController {
 
     @Autowired
-    private PerosnServiceJpa service;
+    private UserServiceJpa service;
     // private PersonService service;
 
         // public HomeController(){
@@ -41,18 +41,18 @@ public class HomeController {
         //PersonRepo repo = new PersonRepo();
         //PersonService service = new PersonService();
     
-        model.addAttribute("peoples" ,service.findAllPersons());
+        model.addAttribute("users" ,service.findAllUsers());
             return "index";
         } 
 
-        @GetMapping("/persons/add")
-        public String showAddperson(Model model){
-            model.addAttribute("person", new Person());
+        @GetMapping("/users/add")
+        public String showAddUser(Model model){
+            model.addAttribute("user", new User());
             return "add";
         }
 
-        @PostMapping("/persons/add")
-        public String addPerson( @Valid Person person, BindingResult errors, Model model){
+        @PostMapping("/users/add")
+        public String addUser( @Valid User user, BindingResult errors, Model model){
             //logic untuk save ke list perosn
             if (errors.hasErrors()) {
 
@@ -63,48 +63,48 @@ public class HomeController {
                 }
                 model.addAttribute("ERROR", messageData);
             
-                model.addAttribute("person", person);
+                model.addAttribute("user", user);
                 return "add";    
                 
             }
 
-            service.addPerson(person);
+            service.addUser(user);
 
             return "redirect:/";
         }
 
-        @GetMapping("/persons/edit/{id}")
-        public String showEditPerson(@PathVariable("id") long id, Model model) {
-        Person person = service.findPersonById(id);
-        model.addAttribute("person", person);
+        @GetMapping("/users/edit/{id}")
+        public String showEditUser(@PathVariable("id") long id, Model model) {
+        User user = service.findUserById(id);
+        model.addAttribute("user", user);
         return "edit"; 
     }
 
-    @PostMapping("/persons/edit")
-    public String editPerson(@Valid Person person, BindingResult errors, Model model) {
+    @PostMapping("/users/edit")
+    public String editUser(@Valid User user, BindingResult errors, Model model) {
         if (errors.hasErrors()) {
             MessageData messageData = new MessageData();
             for (ObjectError err : errors.getAllErrors()) {
                 messageData.getMessages().add(err.getDefaultMessage());
             }
             model.addAttribute("ERROR", messageData);
-            model.addAttribute("person", person);
+            model.addAttribute("user", user);
             return "edit";
         }
-        service.updatePerson(person);
+        service.updateUser(user);
         return "redirect:/";
     }
 
 
-        @GetMapping("/persons/{id}")
-        public String showDetaolerson( Model model, @PathVariable("id") long id){
-           model.addAttribute("person", service.findPersonById(id));
+        @GetMapping("/users/{id}")
+        public String showDetailUser( Model model, @PathVariable("id") long id){
+           model.addAttribute("user", service.findUserById(id));
             return "detail";
         }
 
-        @GetMapping("/persons/remove/{id}")
-        public String removePerson(@PathVariable("id") long id){
-            service.removePersonById(id);
+        @GetMapping("/users/remove/{id}")
+        public String removeUser(@PathVariable("id") long id){
+            service.removeUserById(id);
             return "redirect:/";
         }
     }

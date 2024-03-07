@@ -15,8 +15,8 @@
   </head>
   <body>
     <div class="container">
-      <h1>List of persons</h1>
-      <a th:href="@{/persons/add}" class="btn btn-success">
+      <h1>List of users</h1>
+      <a th:href="@{/users/add}" class="btn btn-success">
         <i class="fas fa-plus"></i> Add New Person
       </a>
       <p></p>
@@ -31,23 +31,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="p : ${peoples}">
+          <tr th:each="p : ${users}">
             <td th:text="${p.firstName}"></td>
             <td th:text="${p.lastName}"></td>
             <td th:text="${p.age}"></td>
             <td th:text="${p.email}"></td>
             <td>
-              <a th:href="@{/persons/{id}(id=${p.id})}" class="btn btn-primary">
+              <a th:href="@{/users/{id}(id=${p.id})}" class="btn btn-primary">
                 <i class="fas fa-eye"></i>
               </a>
               <a
-                th:href="@{/persons/edit/{id}(id=${p.id})}"
+                th:href="@{/users/edit/{id}(id=${p.id})}"
                 class="btn btn-warning"
               >
                 <i class="fas fa-edit"></i>
               </a>
               <a
-                th:href="@{/persons/remove/{id}(id=${p.id})}"
+                th:href="@{/users/remove/{id}(id=${p.id})}"
                 class="btn btn-danger"
               >
                 <i class="fas fa-trash"></i>

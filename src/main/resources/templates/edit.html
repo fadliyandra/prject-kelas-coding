@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Edit person</h1>
+      <h1>Edit user</h1>
       <span th:if="${ERROR}">
         <div class="alert alert-danger">
           <strong>Error(s)</strong>
@@ -24,7 +24,7 @@
           </ul>
         </div>
       </span>
-      <form th:object="${person}" method="post" th:action="@{/persons/edit}">
+      <form th:object="${user}" method="post" th:action="@{/users/edit}">
         <div class="form-group">
           <label for="name">First Name</label>
           <input type="text" class="form-control" th:field="*{firstName}" />
@@ -41,6 +41,7 @@
           <label for="name">Age</label>
           <input type="text" class="form-control" th:field="*{age}" />
         </div>
+        <input type="hidden" th:field="*{password}" />
         <input type="hidden" th:field="*{id}" />
         <button type="submit" class="btn btn-primary">Save</button>
       </form>
